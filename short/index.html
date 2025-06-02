@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Keyboard Shortcuts</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#330867" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <!-- iOS meta tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="apple-touch-icon"  href="1.png" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+</head>
+<body>
+  <header>
+     <h1><i class="fas fa-bolt icon"></i> Keyboard Shortcuts</h1>
+  </header>
+    <!-- Theme Switcher ----------------------------------------------------------------------------------------------->
+    <div class="theme-switcher">
+        <button class="theme-button" onclick="toggleThemeMenu()">
+        <i class="fa-solid fa-palette"></i>
+        </button>
+        <div class="theme-list" id="themeList"></div>
+    </div>
+
+    <!-- Search bar ------------------------------------------------------------------------------------------>
+<input 
+  type="text" 
+  id="shortcutSearch" 
+  placeholder="Search shortcuts..." 
+
+  onkeyup="filterShortcuts()"
+/>
+
+
+    <script>
+    function filterShortcuts() {
+    const input = document.getElementById('shortcutSearch');
+    const filter = input.value.toLowerCase();
+    const detailsElements = document.querySelectorAll('details');
+
+    detailsElements.forEach(details => {
+        const section = details.querySelector('section');
+        const h3Elements = section.querySelectorAll('h3');
+        const ulElements = section.querySelectorAll('ul');
+
+        let detailsHasVisibleShortcuts = false;
+
+        // For each <ul>, check if any <li> matches search
+        ulElements.forEach((ul, idx) => {
+        const liItems = ul.querySelectorAll('li');
+        let ulHasVisibleItems = false;
+
+        liItems.forEach(li => {
+            const text = li.textContent.toLowerCase();
+            if (text.includes(filter)) {
+            li.style.display = '';
+            ulHasVisibleItems = true;
+            } else {
+            li.style.display = 'none';
+            }
+        });
+
+        // Show or hide the <ul> based on if it has visible <li>
+        ul.style.display = ulHasVisibleItems ? '' : 'none';
+
+        // Show or hide the corresponding <h3>
+        if(h3Elements[idx]) {
+            h3Elements[idx].style.display = ulHasVisibleItems ? '' : 'none';
+        }
+
+        if (ulHasVisibleItems) detailsHasVisibleShortcuts = true;
+        });
+
+        // Show/hide the entire <details> based on matches inside
+        details.style.display = detailsHasVisibleShortcuts || filter === '' ? '' : 'none';
+
+        // Optionally, open the details automatically if there is a filter and matches
+        if(filter === '') {
+        details.removeAttribute('open');
+        } else if(detailsHasVisibleShortcuts) {
+        details.setAttribute('open', '');
+        }
+    });
+    }
+    </script>
+    <!-------------------------------------------------------------------------------------------------------------------->
+  <main>
+    <details>
+    <summary>🪟 Windows Shortcuts</summary>
+    <section>
+        <h3>🔤 General</h3>
+        <ul>
+        <li><strong>Ctrl + C</strong> : Copy</li>
+        <li><strong>Ctrl + X</strong> : Cut</li>
+        <li><strong>Ctrl + V</strong> : Paste</li>
+        <li><strong>Ctrl + Z</strong> : Undo</li>
+        <li><strong>Ctrl + Y</strong> : Redo</li>
+        <li><strong>Ctrl + A</strong> : Select all</li>
+        <li><strong>Ctrl + S</strong> : Save</li>
+        <li><strong>Ctrl + P</strong> : Print</li>
+        <li><strong>Ctrl + N</strong> : New window</li>
+        <li><strong>Ctrl + O</strong> : Open file</li>
+        </ul>
+
+        <h3>🖥️ System Shortcuts</h3>
+        <ul>
+        <li><strong>Win + D</strong> : Show/hide desktop</li>
+        <li><strong>Win + E</strong> : Open File Explorer</li>
+        <li><strong>Win + L</strong> : Lock PC</li>
+        <li><strong>Win + R</strong> : Open Run</li>
+        <li><strong>Win + I</strong> : Open Settings</li>
+        <li><strong>Win + A</strong> : Open Action Center</li>
+        <li><strong>Win + Tab</strong> : Open Task View</li>
+        <li><strong>Win + X</strong> : Open power user menu</li>
+        <li><strong>Win + X → U → U</strong> : Shut down</li>
+        <li><strong>Win + X → U → R</strong> : Restart</li>
+        <li><strong>Win + X → U → S</strong> : Sleep</li>
+        <li><strong>Win + Ctrl + Shift + B</strong> : Restart graphics driver</li>
+        <li><strong>Win + Pause</strong> : System properties</li>
+        <li><strong>Win + ,</strong> : Peek at desktop</li>
+        </ul>
+
+        <h3>📁 File Explorer</h3>
+        <ul>
+        <li><strong>Ctrl + Shift + N</strong> : New folder</li>
+        <li><strong>Alt + Enter</strong> : File properties</li>
+        <li><strong>F2</strong> : Rename</li>
+        <li><strong>Alt + ↑</strong> : Go up folder</li>
+        <li><strong>Alt + ←</strong> : Back</li>
+        <li><strong>Alt + →</strong> : Forward</li>
+        <li><strong>Ctrl + E</strong> : Focus search bar</li>
+        <li><strong>F3</strong> : Search</li>
+        <li><strong>Ctrl + Shift + E</strong> : Expand folder tree</li>
+        <li><strong>F4</strong> : Focus address bar</li>
+        </ul>
+
+        <h3>🌐 Web Browsing</h3>
+        <ul>
+        <li><strong>Ctrl + T</strong> : New tab</li>
+        <li><strong>Ctrl + W</strong> : Close tab</li>
+        <li><strong>Ctrl + Shift + T</strong> : Reopen closed tab</li>
+        <li><strong>Ctrl + Tab</strong> : Next tab</li>
+        <li><strong>Ctrl + Shift + Tab</strong> : Previous tab</li>
+        <li><strong>Ctrl + L</strong> : Address bar focus</li>
+        <li><strong>Ctrl + D</strong> : Bookmark page</li>
+        <li><strong>Ctrl + H</strong> : History</li>
+        <li><strong>Ctrl + J</strong> : Downloads</li>
+        <li><strong>F5</strong> : Refresh</li>
+        <li><strong>Ctrl + F5</strong> : Force refresh</li>
+        <li><strong>Ctrl + U</strong> : View source</li>
+        </ul>
+
+        <h3>📄 Document Navigation</h3>
+        <ul>
+        <li><strong>Ctrl + Home</strong> : Go to top</li>
+        <li><strong>Ctrl + End</strong> : Go to bottom</li>
+        <li><strong>Page Up</strong> : Scroll up</li>
+        <li><strong>Page Down</strong> : Scroll down</li>
+        <li><strong>Home</strong> : Line start</li>
+        <li><strong>End</strong> : Line end</li>
+        <li><strong>Ctrl + →</strong> : Next word</li>
+        <li><strong>Ctrl + ←</strong> : Previous word</li>
+        </ul>
+
+        <h3>🖱️ Window Management</h3>
+        <ul>
+        <li><strong>Alt + Tab</strong> : Switch apps</li>
+        <li><strong>Alt + F4</strong> : Close app</li>
+        <li><strong>Win + ↑</strong> : Maximize</li>
+        <li><strong>Win + ↓</strong> : Minimize</li>
+        <li><strong>Win + ←</strong> : Snap left</li>
+        <li><strong>Win + →</strong> : Snap right</li>
+        <li><strong>Win + Shift + ↑</strong> : Vertical maximize</li>
+        <li><strong>Win + Shift + ↓</strong> : Restore vertical</li>
+        <li><strong>Win + Shift + M</strong> : Restore minimized windows</li>
+        <li><strong>Win + M</strong> : Minimize all</li>
+        </ul>
+
+        <h3>🖼️ Screenshots & Media</h3>
+        <ul>
+        <li><strong>PrtScn</strong> : Full screenshot</li>
+        <li><strong>Alt + PrtScn</strong> : Active window screenshot</li>
+        <li><strong>Win + Shift + S</strong> : Snip & Sketch</li>
+        <li><strong>Win + G</strong> : Game bar</li>
+        <li><strong>Win + Alt + R</strong> : Start/stop screen recording</li>
+        <li><strong>Win + V</strong> : Clipboard history</li>
+        <li><strong>Win + .</strong> : Emoji picker</li>
+        <li><strong>Ctrl + Shift + Esc</strong> : Task Manager</li>
+        </ul>
+
+        <h3>⌨️ Accessibility</h3>
+        <ul>
+        <li><strong>Win + U</strong> : Open Ease of Access Center</li>
+        <li><strong>Win + + / -</strong> : Zoom in/out</li>
+        <li><strong>Win + Ctrl + Enter</strong> : Toggle Narrator</li>
+        <li><strong>Shift (5x)</strong> : Toggle Sticky Keys</li>
+        <li><strong>Left Alt + Left Shift + Print Screen</strong> : Toggle High Contrast</li>
+        <li><strong>Win + H</strong> : Start dictation</li>
+        </ul>
+
+        <h3>🧠 Advanced & Power User</h3>
+        <ul>
+        <li><strong>Ctrl + Shift + Esc</strong> : Open Task Manager</li>
+        <li><strong>Win + Ctrl + D</strong> : New virtual desktop</li>
+        <li><strong>Win + Ctrl + ← / →</strong> : Switch desktops</li>
+        <li><strong>Win + Ctrl + F4</strong> : Close virtual desktop</li>
+        <li><strong>Ctrl + Shift + N</strong> : New folder</li>
+        <li><strong>Win + P</strong> : Project screen</li>
+        <li><strong>Win + K</strong> : Connect devices</li>
+        <li><strong>Win + B</strong> : Focus system tray</li>
+        <li><strong>Win + Number</strong> : Launch taskbar app</li>
+        <li><strong>Win + Alt + D</strong> : Show date/time</li>
+        </ul>
+
+        <h3>🧠 Productivity</h3>
+        <ul>
+        <li><strong>Ctrl + F</strong> : Find</li>
+        <li><strong>Ctrl + Shift + N</strong> : Create new folder</li>
+        <li><strong>Ctrl + Shift + Esc</strong> : Open Task Manager</li>
+        <li><strong>Ctrl + Esc</strong> : Open Start menu</li>
+        <li><strong>Alt + F4</strong> : Close active window</li>
+        <li><strong>Alt + Tab</strong> : Switch between open apps</li>
+        <li><strong>Alt + Spacebar</strong> : Open window menu</li>
+        <li><strong>Win + Shift + S</strong> : Open Snip & Sketch</li>
+        <li><strong>Win + V</strong> : Open clipboard history</li>
+        <li><strong>Win + G</strong> : Open Game Bar</li>
+        </ul>
+
+        <h3>🧭 Navigation & Window Management</h3>
+        <ul>
+        <li><strong>Win + Up Arrow</strong> : Maximize window</li>
+        <li><strong>Win + Down Arrow</strong> : Minimize/restore window</li>
+        <li><strong>Win + Left Arrow</strong> : Snap window to left</li>
+        <li><strong>Win + Right Arrow</strong> : Snap window to right</li>
+        <li><strong>Win + Shift + Left/Right</strong> : Move window to another monitor</li>
+        <li><strong>Win + M</strong> : Minimize all windows</li>
+        <li><strong>Win + Shift + M</strong> : Restore minimized windows</li>
+        <li><strong>Win + Home</strong> : Minimize all except active window</li>
+        <li><strong>Win + T</strong> : Focus taskbar apps</li>
+        <li><strong>Win + Number</strong> : Open app pinned to taskbar in that position</li>
+        </ul>
+
+        <h3>🖱️ Accessibility & Ease of Access</h3>
+        <ul>
+        <li><strong>Win + U</strong> : Open Accessibility settings</li>
+        <li><strong>Win + Ctrl + Enter</strong> : Start/stop Narrator</li>
+        <li><strong>Win + Plus (+)</strong> : Zoom in (Magnifier)</li>
+        <li><strong>Win + Minus (-)</strong> : Zoom out (Magnifier)</li>
+        <li><strong>Win + Esc</strong> : Exit Magnifier</li>
+        <li><strong>Win + H</strong> : Start dictation</li>
+        <li><strong>Win + O</strong> : Lock device orientation</li>
+        </ul>
+
+        <h3>📄 Virtual Desktops</h3>
+        <ul>
+        <li><strong>Win + Ctrl + D</strong> : Create new virtual desktop</li>
+        <li><strong>Win + Ctrl + Left/Right</strong> : Switch between desktops</li>
+        <li><strong>Win + Ctrl + F4</strong> : Close current desktop</li>
+        </ul>
+
+        <h3>😎 Emojis & Input</h3>
+        <ul>
+        <li><strong>Win + .</strong> : Open emoji panel</li>
+        <li><strong>Win + ;</strong> : Open emoji panel</li>
+        <li><strong>Win + Space</strong> : Switch input language/keyboard</li>
+        </ul>
+
+        <h3>🕹️ Gaming</h3>
+        <ul>
+        <li><strong>Win + Alt + R</strong> : Start/stop screen recording</li>
+        <li><strong>Win + Alt + G</strong> : Record last few moments of gameplay</li>
+        <li><strong>Win + Alt + B</strong> : Toggle HDR (if supported)</li>
+        <li><strong>Win + Alt + T</strong> : Show/hide recording timer</li>
+        </ul>
+
+        <h3>📁 File Explorer (Extended)</h3>
+        <ul>
+        <li><strong>Alt + D</strong> : Select address bar</li>
+        <li><strong>Ctrl + E / Ctrl + F</strong> : Select search box</li>
+        <li><strong>Ctrl + N</strong> : Open new window</li>
+        <li><strong>Ctrl + W</strong> : Close current window</li>
+        <li><strong>Ctrl + Mouse Wheel</strong> : Change folder view size</li>
+        <li><strong>F2</strong> : Rename selected file/folder</li>
+        <li><strong>F3</strong> : Search for a file/folder</li>
+        <li><strong>F4</strong> : Show address bar list</li>
+        <li><strong>F5</strong> : Refresh window</li>
+        <li><strong>F6</strong> : Cycle through screen elements</li>
+        <li><strong>Alt + Enter</strong> : Open properties</li>
+        <li><strong>Alt + ↑</strong> : Go up one folder level</li>
+        <li><strong>Alt + ← / →</strong> : Back / Forward</li>
+        </ul>
+
+        <h3>📟 Command Prompt</h3>
+        <ul>
+        <li><strong>Ctrl + C</strong> : Cancel command</li>
+        <li><strong>Ctrl + V</strong> : Paste text</li>
+        <li><strong>Ctrl + ↑ / ↓</strong> : Scroll up/down</li>
+        <li><strong>Ctrl + M</strong> : Enter Mark mode</li>
+        <li><strong>Arrow keys</strong> : Navigate command history</li>
+        <li><strong>Tab</strong> : Auto-complete folder/file names</li>
+        </ul>
+
+        <h3>📌 Taskbar Shortcuts</h3>
+        <ul>
+        <li><strong>Win + 1..9</strong> : Open taskbar apps by order</li>
+        <li><strong>Shift + Click</strong> : Open new instance</li>
+        <li><strong>Ctrl + Shift + Click</strong> : Open as admin</li>
+        <li><strong>Shift + Right Click</strong> : Show window menu</li>
+        <li><strong>Win + T</strong> : Cycle through taskbar apps</li>
+        </ul>
+
+        <h3>🌐 Browser Shortcuts (Works in Edge, Chrome, Firefox)</h3>
+        <ul>
+        <li><strong>Ctrl + T</strong> : New tab</li>
+        <li><strong>Ctrl + Shift + T</strong> : Reopen closed tab</li>
+        <li><strong>Ctrl + W</strong> : Close current tab</li>
+        <li><strong>Ctrl + Tab / Shift + Ctrl + Tab</strong> : Next/previous tab</li>
+        <li><strong>Ctrl + D</strong> : Bookmark current page</li>
+        <li><strong>Ctrl + L / Alt + D / F6</strong> : Focus address bar</li>
+        <li><strong>Ctrl + J</strong> : Downloads</li>
+        <li><strong>Ctrl + H</strong> : History</li>
+        <li><strong>Ctrl + Shift + Del</strong> : Clear browsing data</li>
+        </ul>
+
+        <h3>⚙️ Miscellaneous</h3>
+        <ul>
+        <li><strong>Print Screen</strong> : Copy screenshot</li>
+        <li><strong>Alt + Print Screen</strong> : Copy active window screenshot</li>
+        <li><strong>Win + Print Screen</strong> : Save screenshot to file</li>
+        <li><strong>Ctrl + Shift + Esc</strong> : Open Task Manager</li>
+        <li><strong>Shift + Delete</strong> : Delete permanently (bypass Recycle Bin)</li>
+        <li><strong>Win + K</strong> : Connect to wireless display/device</li>
+        <li><strong>Win + P</strong> : Project screen (extend/duplicate)</li>
+        </ul>
+
+        <h3>🖥️ Windows Terminal</h3>
+        <ul>
+        <li><strong>Ctrl + Shift + T</strong> : Open new tab</li>
+        <li><strong>Ctrl + Tab</strong> : Switch to next tab</li>
+        <li><strong>Ctrl + Shift + Tab</strong> : Switch to previous tab</li>
+        <li><strong>Ctrl + Shift + W</strong> : Close current tab</li>
+        <li><strong>Ctrl + C</strong> : Copy selected text</li>
+        <li><strong>Ctrl + V</strong> : Paste from clipboard</li>
+        <li><strong>Ctrl + Shift + Plus (+)</strong> : Zoom in</li>
+        <li><strong>Ctrl + Minus (-)</strong> : Zoom out</li>
+        <li><strong>Ctrl + Shift + F</strong> : Search in terminal</li>
+        <li><strong>Alt + Enter</strong> : Toggle full screen</li>
+        </ul>
+
+    </section>
+    </details>
+
+    <!-- macOS Shortcuts ------------------------------------------------------------------------->
+    <details>
+    <summary>🍎 macOS Shortcuts</summary>
+    <section>
+    <h3>🔤 General</h3>
+    <ul>
+        <li><strong>⌘ + C</strong> : Copy</li>
+        <li><strong>⌘ + V</strong> : Paste</li>
+        <li><strong>⌘ + X</strong> : Cut</li>
+        <li><strong>⌘ + Z</strong> : Undo</li>
+        <li><strong>⌘ + Shift + Z</strong> : Redo</li>
+        <li><strong>⌘ + A</strong> : Select All</li>
+        <li><strong>⌘ + S</strong> : Save</li>
+        <li><strong>⌘ + P</strong> : Print</li>
+        <li><strong>⌘ + N</strong> : New Window</li>
+        <li><strong>⌘ + O</strong> : Open File</li>
+        <li><strong>⌘ + W</strong> : Close Window</li>
+        <li><strong>⌘ + Q</strong> : Quit Application</li>
+        <li><strong>⌘ + `</strong> : Cycle through app windows</li>
+        <li><strong>⌘ + Shift + ?</strong> : macOS Help</li>
+        <li><strong>Fn + Left/Right Arrow</strong> : Home / End</li>
+        <li><strong>⌘ + ↑/↓</strong> : Move to top/bottom of document</li>
+    </ul>
+
+    <h3>🖥️ System Shortcuts</h3>
+    <ul>
+        <li><strong>⌘ + Space</strong> : Spotlight Search</li>
+        <li><strong>⌘ + Tab</strong> : Switch Applications</li>
+        <li><strong>⌘ + Option + Esc</strong> : Force Quit</li>
+        <li><strong>Control + ⌘ + Q</strong> : Lock Screen</li>
+        <li><strong>⌘ + Shift + 3</strong> : Screenshot Full Screen</li>
+        <li><strong>⌘ + Shift + 4</strong> : Screenshot Selection</li>
+        <li><strong>⌘ + Shift + 5</strong> : Screenshot and Record Options</li>
+        <li><strong>⌘ + H</strong> : Hide Active App</li>
+        <li><strong>⌘ + Option + H</strong> : Hide All Other Apps</li>
+        <li><strong>⌘ + M</strong> : Minimize Window</li>
+        <li><strong>⌘ + Option + M</strong> : Minimize All Windows</li>
+        <li><strong>Control + ⌘ + Power</strong> : Restart Mac</li>
+        <li><strong>Control + Option + ⌘ + Power</strong> : Shut Down</li>
+        <li><strong>Control + ⌘ + Q</strong> : Lock Now</li>
+        <li><strong>⌘ + Option + Eject</strong> : Sleep</li>
+        <li><strong>⌘ + Option + Control + Eject</strong> : Shut Down Immediately</li>
+        <li><strong>⌘ + Option + Power</strong> : Sleep Display</li>
+    </ul>
+
+    <h3>📁 Finder Shortcuts</h3>
+    <ul>
+        <li><strong>⌘ + D</strong> : Duplicate Item</li>
+        <li><strong>⌘ + Delete</strong> : Move to Trash</li>
+        <li><strong>⌘ + Shift + Delete</strong> : Empty Trash</li>
+        <li><strong>⌘ + I</strong> : Get Info</li>
+        <li><strong>⌘ + Option + I</strong> : Show Inspector</li>
+        <li><strong>⌘ + J</strong> : Show View Options</li>
+        <li><strong>⌘ + K</strong> : Connect to Server</li>
+        <li><strong>⌘ + L</strong> : Make Alias</li>
+        <li><strong>⌘ + Shift + N</strong> : New Folder</li>
+        <li><strong>⌘ + T</strong> : Open New Tab</li>
+        <li><strong>⌘ + Option + T</strong> : Toggle Finder Toolbar</li>
+        <li><strong>⌘ + /</strong> : Show/Hide Path Bar</li>
+        <li><strong>⌘ + Option + S</strong> : Hide Sidebar</li>
+        <li><strong>⌘ + ↑</strong> : Go to Parent Folder</li>
+        <li><strong>⌘ + ↓</strong> : Open Selected Item</li>
+        <li><strong>⌘ + Option + Space</strong> : Open New Finder Search</li>
+    </ul>
+
+    <h3>🧭 Safari Shortcuts</h3>
+    <ul>
+        <li><strong>⌘ + T</strong> : Open New Tab</li>
+        <li><strong>⌘ + Shift + T</strong> : Reopen Last Closed Tab</li>
+        <li><strong>⌘ + W</strong> : Close Tab</li>
+        <li><strong>⌘ + Option + W</strong> : Close All Tabs</li>
+        <li><strong>⌘ + R</strong> : Reload Page</li>
+        <li><strong>⌘ + L</strong> : Focus Address Bar</li>
+        <li><strong>⌘ + F</strong> : Find on Page</li>
+        <li><strong>⌘ + Option + F</strong> : Quick Website Search</li>
+        <li><strong>⌘ + Y</strong> : View History</li>
+        <li><strong>⌘ + Shift + B</strong> : Toggle Bookmarks Bar</li>
+        <li><strong>⌘ + Option + P</strong> : Private Browsing Window</li>
+        <li><strong>⌘ + Shift + \</strong> : Show All Tabs</li>
+        <li><strong>⌘ + 1 through 9</strong> : Switch to Tab 1–9</li>
+    </ul>
+
+    <h3>🧠 Accessibility</h3>
+    <ul>
+        <li><strong>⌘ + Option + F5</strong> : Toggle Accessibility Options</li>
+        <li><strong>Control + Option + F8</strong> : Open VoiceOver Utility</li>
+        <li><strong>Control + Option + Command + 8</strong> : Invert Colors</li>
+        <li><strong>Control + Option + Command + Period</strong> : Increase Contrast</li>
+        <li><strong>Control + Option + Command + Comma</strong> : Decrease Contrast</li>
+        <li><strong>Control + Option + Command + D</strong> : Toggle VoiceOver</li>
+        <li><strong>Control + Option + Command + =</strong> : Zoom In</li>
+        <li><strong>Control + Option + Command + -</strong> : Zoom Out</li>
+        <li><strong>Control + Option + Command + 8</strong> : Toggle Zoom</li>
+        <li><strong>Fn + Fn (press twice)</strong> : Start Dictation</li>
+    </ul>
+
+    <h3>📊 Productivity</h3>
+    <ul>
+        <li><strong>⌘ + Control + D</strong> : Dictionary Lookup</li>
+        <li><strong>Fn + Q</strong> : Start/Stop Quick Note</li>
+        <li><strong>⌘ + Shift + A</strong> : Open Applications folder (in Finder)</li>
+        <li><strong>Control + ⌘ + Space</strong> : Emoji & Symbols Picker</li>
+        <li><strong>⌘ + Option + Control + T</strong> : Open Launchpad</li>
+        <li><strong>⌘ + Option + F</strong> : Search in Finder</li>
+        <li><strong>⌘ + Shift + G</strong> : Go to Folder (in Finder)</li>
+    </ul>
+    </section>
+    </details>
+
+    <!-- Google Chrome Shortcuts ------------------------------------------------------------------->
+    <details>
+    <summary>🌐 Google Chrome Shortcuts</summary>
+    <section>
+    <h3>🔤 General & Tabs</h3>
+    <ul>
+        <li><strong>Ctrl + T</strong> : Open New Tab</li>
+        <li><strong>Ctrl + N</strong> : New Window</li>
+        <li><strong>Ctrl + Shift + N</strong> : New Incognito Window</li>
+        <li><strong>Ctrl + W</strong> : Close Current Tab</li>
+        <li><strong>Ctrl + Shift + T</strong> : Reopen Last Closed Tab</li>
+        <li><strong>Ctrl + Tab</strong> : Switch to Next Tab</li>
+        <li><strong>Ctrl + Shift + Tab</strong> : Switch to Previous Tab</li>
+        <li><strong>Ctrl + 1–8</strong> : Switch to Tab 1–8</li>
+        <li><strong>Ctrl + 9</strong> : Switch to Last Tab</li>
+        <li><strong>Ctrl + Click</strong> : Open Link in New Tab</li>
+        <li><strong>Ctrl + Shift + Click</strong> : Open Link in New Tab & Switch to It</li>
+        <li><strong>Ctrl + Shift + B</strong> : Show/Hide Bookmarks Bar</li>
+        <li><strong>Ctrl + L</strong> : Focus Address Bar</li>
+        <li><strong>Alt + Enter</strong> : Open Address Bar Search in New Tab</li>
+        <li><strong>Ctrl + Shift + M</strong> : Switch Profiles</li>
+    </ul>
+
+    <h3>🖥️ Page Navigation</h3>
+    <ul>
+        <li><strong>Alt + Left Arrow</strong> : Back</li>
+        <li><strong>Alt + Right Arrow</strong> : Forward</li>
+        <li><strong>F5</strong> : Reload Page</li>
+        <li><strong>Ctrl + F5</strong> : Hard Reload (Bypass Cache)</li>
+        <li><strong>Esc</strong> : Stop Page Load</li>
+        <li><strong>Ctrl + U</strong> : View Page Source</li>
+        <li><strong>Ctrl + D</strong> : Bookmark Current Page</li>
+        <li><strong>Ctrl + J</strong> : Open Downloads</li>
+        <li><strong>Ctrl + H</strong> : Open History</li>
+        <li><strong>Ctrl + O</strong> : Open a File in Chrome</li>
+        <li><strong>Ctrl + E</strong> or <strong>Ctrl + K</strong> : Move cursor to search bar</li>
+    </ul>
+
+    <h3>🔍 Search & Tools</h3>
+    <ul>
+        <li><strong>Ctrl + F</strong> : Find on Page</li>
+        <li><strong>Ctrl + G</strong> : Find Next</li>
+        <li><strong>Ctrl + Shift + G</strong> : Find Previous</li>
+        <li><strong>Ctrl + Shift + Delete</strong> : Clear Browsing Data</li>
+        <li><strong>Ctrl + Shift + O</strong> : Open Bookmarks Manager</li>
+        <li><strong>Ctrl + Shift + I</strong> : Open DevTools</li>
+        <li><strong>Ctrl + Shift + J</strong> : Open DevTools (Console)</li>
+        <li><strong>Ctrl + Shift + C</strong> : Inspect Element (Picker)</li>
+        <li><strong>Ctrl + P</strong> : Print Current Page</li>
+        <li><strong>Ctrl + S</strong> : Save Web Page</li>
+        <li><strong>Ctrl + Shift + U</strong> : View Source (Unicode mode)</li>
+    </ul>
+
+    <h3>🧠 Accessibility & View</h3>
+    <ul>
+        <li><strong>Ctrl + Plus (+)</strong> : Zoom In</li>
+        <li><strong>Ctrl + Minus (-)</strong> : Zoom Out</li>
+        <li><strong>Ctrl + 0</strong> : Reset Zoom</li>
+        <li><strong>F11</strong> : Toggle Fullscreen</li>
+        <li><strong>Ctrl + Shift + B</strong> : Toggle Bookmarks Bar</li>
+        <li><strong>Ctrl + Shift + M</strong> : Switch Profiles</li>
+        <li><strong>Ctrl + Shift + N</strong> : New Incognito Window</li>
+        <li><strong>Ctrl + Shift + Delete</strong> : Clear Browsing Data</li>
+        <li><strong>Ctrl + Shift + I</strong> : Toggle Developer Tools</li>
+    </ul>
+
+    <h3>🎵 Media & Productivity</h3>
+    <ul>
+        <li><strong>Media Keys</strong> : Play/Pause, Next/Prev Track (on supported sites)</li>
+        <li><strong>Ctrl + Shift + Space</strong> : Toggle Live Caption</li>
+        <li><strong>Picture-in-Picture</strong> : Right-click twice on video → "Picture in Picture"</li>
+        <li><strong>Ctrl + Shift + E</strong> : Manage Extensions</li>
+        <li><strong>Alt + Home</strong> : Open Home Page</li>
+        <li><strong>Ctrl + Shift + T</strong> : Reopen Last Closed Tab</li>
+        <li><strong>Ctrl + Shift + Q (twice)</strong> : Quit Chrome</li>
+    </ul>
+    </section>
+    </details>
+
+    <!-- VS Code Shortcuts ----------------------------------------------------------------------->
+    <details>
+      <summary>🧠 VS Code Shortcuts</summary>
+      <section>
+        <h3>🔤 General</h3>
+        <ul>
+          <li><strong>Ctrl + P</strong> : Quick Open</li>
+          <li><strong>Ctrl + Shift + P</strong> : Command Palette</li>
+        </ul>
+      
+        <h3>🗂️ File Navigation</h3>
+        <ul>
+          <li><strong>Ctrl + P</strong> : Quick Open File</li>
+          <li><strong>Ctrl + Shift + P</strong> : Show Command Palette</li>
+          <li><strong>Ctrl + Tab</strong> : Cycle through open files</li>
+          <li><strong>Ctrl + Shift + Tab</strong> : Cycle backward</li>
+          <li><strong>Ctrl + ,</strong> : Open Settings</li>
+          <li><strong>Ctrl + K then S</strong> : Keyboard Shortcuts</li>
+          <li><strong>Ctrl + B</strong> : Toggle Sidebar</li>
+          <li><strong>Ctrl + \</strong> : Split Editor</li>
+          <li><strong>Ctrl + 1 / 2 / 3</strong> : Focus into editor groups</li>
+          <li><strong>Ctrl + W</strong> : Close Editor</li>
+        </ul>
+
+        <h3>✍️ Editing</h3>
+        <ul>
+          <li><strong>Ctrl + X</strong> : Cut line</li>
+          <li><strong>Ctrl + C</strong> : Copy line</li>
+          <li><strong>Alt + ↑ / ↓</strong> : Move line up/down</li>
+          <li><strong>Shift + Alt + ↓ / ↑</strong> : Copy line up/down</li>
+          <li><strong>Ctrl + Shift + K</strong> : Delete line</li>
+          <li><strong>Ctrl + Enter</strong> : Insert line below</li>
+          <li><strong>Ctrl + Shift + Enter</strong> : Insert line above</li>
+          <li><strong>Ctrl + Shift + \\</strong> : Jump to matching bracket</li>
+          <li><strong>Alt + Click</strong> : Insert cursor</li>
+          <li><strong>Ctrl + D</strong> : Add selection to next find match</li>
+          <li><strong>Ctrl + Shift + L</strong> : Select all matches</li>
+          <li><strong>Ctrl + F2</strong> : Rename Symbol</li>
+        </ul>
+
+        <h3>🔎 Search & Replace</h3>
+        <ul>
+          <li><strong>Ctrl + F</strong> : Find</li>
+          <li><strong>Ctrl + H</strong> : Replace</li>
+          <li><strong>F3</strong> : Find Next</li>
+          <li><strong>Shift + F3</strong> : Find Previous</li>
+          <li><strong>Alt + Enter</strong> : Select all occurrences</li>
+          <li><strong>Ctrl + Shift + F</strong> : Global search</li>
+        </ul>
+
+        <h3>🧱 Code Navigation</h3>
+        <ul>
+          <li><strong>F12</strong> : Go to Definition</li>
+          <li><strong>Alt + F12</strong> : Peek Definition</li>
+          <li><strong>Ctrl + Click</strong> : Go to Definition</li>
+          <li><strong>Ctrl + Shift + O</strong> : Go to Symbol</li>
+          <li><strong>Ctrl + T</strong> : Go to All Symbols</li>
+          <li><strong>Ctrl + G</strong> : Go to Line</li>
+          <li><strong>Ctrl + M</strong> : Toggle Tab Moves Focus</li>
+          <li><strong>Ctrl + Shift + M</strong> : Show Problems</li>
+          <li><strong>F8</strong> : Next Error</li>
+          <li><strong>Shift + F8</strong> : Previous Error</li>
+        </ul>
+
+        <h3>⚙️ Refactoring & Formatting</h3>
+        <ul>
+          <li><strong>Alt + Shift + F</strong> : Format Document</li>
+          <li><strong>Ctrl + K then Ctrl + F</strong> : Format Selection</li>
+          <li><strong>F2</strong> : Rename Symbol</li>
+          <li><strong>Ctrl + .</strong> : Quick Fix</li>
+          <li><strong>Shift + Alt + F</strong> : Format Document (alternative)</li>
+          <li><strong>Ctrl + /</strong> : Toggle Line Comment</li>
+          <li><strong>Shift + Alt + A</strong> : Toggle Block Comment</li>
+        </ul>
+
+        <h3>📤 Source Control</h3>
+        <ul>
+          <li><strong>Ctrl + Shift + G</strong> : Open Source Control</li>
+          <li><strong>Ctrl + Enter</strong> : Commit changes</li>
+          <li><strong>Ctrl + Shift + U</strong> : View Output</li>
+        </ul>
+
+        <h3>🧪 Debugging</h3>
+        <ul>
+          <li><strong>F9</strong> : Toggle Breakpoint</li>
+          <li><strong>F5</strong> : Start/Continue Debugging</li>
+          <li><strong>Shift + F5</strong> : Stop Debugging</li>
+          <li><strong>F11</strong> : Step Into</li>
+          <li><strong>F10</strong> : Step Over</li>
+          <li><strong>Shift + F11</strong> : Step Out</li>
+          <li><strong>Ctrl + K then Ctrl + I</strong> : Show Hover</li>
+        </ul>
+
+        <h3>📊 Terminal</h3>
+        <ul>
+          <li><strong>Ctrl + `</strong> : Toggle Terminal</li>
+          <li><strong>Ctrl + Shift + `</strong> : Create New Terminal</li>
+          <li><strong>Ctrl + Shift + C</strong> : Copy Terminal Content</li>
+          <li><strong>Ctrl + Shift + V</strong> : Paste into Terminal</li>
+        </ul>
+
+        <h3>🖥️ View Controls</h3>
+        <ul>
+          <li><strong>Ctrl + Shift + E</strong> : Explorer</li>
+          <li><strong>Ctrl + Shift + F</strong> : Search</li>
+          <li><strong>Ctrl + Shift + G</strong> : Source Control</li>
+          <li><strong>Ctrl + Shift + D</strong> : Debug</li>
+          <li><strong>Ctrl + Shift + X</strong> : Extensions</li>
+          <li><strong>Ctrl + Shift + U</strong> : Output</li>
+          <li><strong>Ctrl + Shift + M</strong> : Problems</li>
+        </ul>
+
+        <h3>🧩 Extensions</h3>
+        <ul>
+          <li><strong>Ctrl + Shift + X</strong> : Open Extensions</li>
+          <li><strong>Ctrl + Shift + H</strong> : Replace in Files</li>
+        </ul>
+
+        <h3>🛑 Misc</h3>
+        <ul>
+          <li><strong>Ctrl + Q</strong> : Show all commands</li>
+          <li><strong>Ctrl + Shift + P</strong> : Command Palette</li>
+          <li><strong>Ctrl + K, V</strong> : Markdown Preview</li>
+          <li><strong>Alt + Z</strong> : Toggle Word Wrap</li>
+        </ul>
+      </section>
+    </details>
+
+    <!-- GitHub Shortcuts ----------------------------------------------------------------------->
+    <details>
+        <summary>🐙 GitHub Shortcuts</summary>
+        <section>
+        <h3>🔤 General Navigation</h3>
+        <ul>
+            <li><strong>g then n</strong> : Go to Notifications</li>
+            <li><strong>g then p</strong> : Go to Pull Requests</li>
+            <li><strong>g then i</strong> : Go to Issues</li>
+            <li><strong>g then d</strong> : Go to Dashboard</li>
+            <li><strong>g then s</strong> : Go to Search</li>
+            <li><strong>g then b</strong> : Go to Repositories</li>
+            <li><strong>g then w</strong> : Go to Wiki</li>
+            <li><strong>g then c</strong> : Go to Projects</li>
+        </ul>
+
+        <h3>🧾 File and Code Navigation</h3>
+        <ul>
+            <li><strong>t</strong> : Open file finder to jump to a file</li>
+            <li><strong>y</strong> : Copy permalink URL for current file and line</li>
+            <li><strong>b</strong> : Jump to Blame view of the current file</li>
+            <li><strong>l</strong> : Show line history for current line</li>
+            <li><strong>Ctrl + s (Cmd + s on Mac)</strong> : Save changes when editing files</li>
+        </ul>
+
+        <h3>🛠️ Issue and PR Navigation</h3>
+        <ul>
+            <li><strong>i</strong> : Open issues sidebar</li>
+            <li><strong>p</strong> : Open pull requests sidebar</li>
+            <li><strong>/</strong> : Focus on search box</li>
+            <li><strong>n</strong> : Next issue/PR in the list</li>
+            <li><strong>p</strong> : Previous issue/PR in the list</li>
+            <li><strong>c</strong> : Create a new issue or pull request</li>
+        </ul>
+
+        <h3>📝 Writing and Commenting</h3>
+        <ul>
+            <li><strong>@</strong> : Mention a user or team</li>
+            <li><strong>#</strong> : Reference an issue or pull request</li>
+            <li><strong>Ctrl + Enter (Cmd + Enter on Mac)</strong> : Submit comment, issue, or PR</li>
+            <li><strong>Tab</strong> : Autocomplete usernames or issue numbers when typing</li>
+            <li><strong>Ctrl + B (Cmd + B)</strong> : Bold selected text in markdown editor</li>
+            <li><strong>Ctrl + I (Cmd + I)</strong> : Italicize selected text in markdown editor</li>
+        </ul>
+
+        <h3>📋 Miscellaneous</h3>
+        <ul>
+            <li><strong>.</strong> : Open web-based VS Code editor (GitHub Codespaces)</li>
+            <li><strong>Shift + .</strong> : Toggle file tree in code view</li>
+            <li><strong>?</strong> : Show all GitHub keyboard shortcuts overlay</li>
+            <li><strong>Ctrl + f (Cmd + f)</strong> : Find in file</li>
+            <li><strong>Ctrl + Shift + f (Cmd + Shift + f)</strong> : Global search across repo</li>
+            <li><strong>Ctrl + Shift + p (Cmd + Shift + p)</strong> : Command palette (Codespaces/editor)</li>
+        </ul>
+
+        <h3>🔤 General Git Commands</h3>
+        <ul>
+        <li><strong>git clone &lt;repo_url&gt;</strong> : Clone a repository</li>
+        <li><strong>git status</strong> : Show the working tree status</li>
+        <li><strong>git add .</strong> : Stage all changes</li>
+        <li><strong>git commit -m "message"</strong> : Commit staged changes</li>
+        <li><strong>git push</strong> : Push changes to remote</li>
+        <li><strong>git pull</strong> : Pull latest changes</li>
+        <li><strong>git branch</strong> : List branches</li>
+        <li><strong>git checkout &lt;branch_name&gt;</strong> : Switch branch</li>
+        <li><strong>git merge &lt;branch_name&gt;</strong> : Merge a branch</li>
+        <li><strong>git log</strong> : Show commit history</li>
+        </ul>
+        </section>
+    </details>
+
+    <details>
+    <summary>📊 Microsoft Office Shortcuts</summary>
+    <section>
+        <h3>Microsoft Word</h3>
+        <ul>
+        <li><strong>Ctrl + B</strong> : Bold text</li>
+        <li><strong>Ctrl + I</strong> : Italicize text</li>
+        <li><strong>Ctrl + U</strong> : Underline text</li>
+        <li><strong>Ctrl + S</strong> : Save document</li>
+        <li><strong>Ctrl + P</strong> : Print document</li>
+        <li><strong>Ctrl + K</strong> : Insert hyperlink</li>
+        <li><strong>Ctrl + F</strong> : Find text</li>
+        <li><strong>Ctrl + H</strong> : Replace text</li>
+        <li><strong>Ctrl + Z</strong> : Undo</li>
+        <li><strong>Ctrl + Y</strong> : Redo</li>
+        </ul>
+
+        <h3>Microsoft Excel</h3>
+        <ul>
+        <li><strong>Ctrl + C</strong> : Copy</li>
+        <li><strong>Ctrl + V</strong> : Paste</li>
+        <li><strong>Ctrl + X</strong> : Cut</li>
+        <li><strong>Ctrl + Z</strong> : Undo</li>
+        <li><strong>Ctrl + Y</strong> : Redo</li>
+        <li><strong>Ctrl + Arrow Keys</strong> : Move to edge of data region</li>
+        <li><strong>Ctrl + Space</strong> : Select entire column</li>
+        <li><strong>Shift + Space</strong> : Select entire row</li>
+        <li><strong>F2</strong> : Edit active cell</li>
+        <li><strong>Alt + =</strong> : AutoSum</li>
+        </ul>
+
+        <h3>Microsoft PowerPoint</h3>
+        <ul>
+        <li><strong>F5</strong> : Start slideshow</li>
+        <li><strong>Esc</strong> : End slideshow</li>
+        <li><strong>Ctrl + M</strong> : New slide</li>
+        <li><strong>Ctrl + D</strong> : Duplicate slide or object</li>
+        <li><strong>Ctrl + Shift + C</strong> : Copy formatting</li>
+        <li><strong>Ctrl + Shift + V</strong> : Paste formatting</li>
+        <li><strong>Ctrl + K</strong> : Insert hyperlink</li>
+        <li><strong>Ctrl + S</strong> : Save presentation</li>
+        <li><strong>Ctrl + P</strong> : Print</li>
+        <li><strong>Ctrl + Z</strong> : Undo</li>
+        </ul>
+    </section>
+    </details>
+
+    <details>
+    <summary>♿ Accessibility Shortcuts</summary>
+    <section>
+        <ul>
+        <li><strong>Windows + U</strong> : Open Accessibility Settings</li>
+        <li><strong>Windows + Ctrl + C</strong> : Toggle color filters</li>
+        <li><strong>Windows + Plus (+)</strong> : Zoom in (Magnifier)</li>
+        <li><strong>Windows + Minus (-)</strong> : Zoom out (Magnifier)</li>
+        <li><strong>Windows + Esc</strong> : Exit Magnifier</li>
+        <li><strong>Windows + Enter</strong> : Open Narrator</li>
+        <li><strong>Alt + Left Shift + Print Screen</strong> : Toggle High Contrast</li>
+        <li><strong>Ctrl + Windows + N</strong> : Open Narrator settings</li>
+        <li><strong>Mac: Command + Option + F5</strong> : Open Accessibility Options</li>
+        <li><strong>Mac: Command + Option + 8</strong> : Toggle Zoom</li>
+        </ul>
+    </section>
+    </details>
+
+    <details>
+    <summary>🎨 Adobe Photoshop Shortcuts</summary>
+    <section>
+        <h3>🔤 General</h3>
+        <ul>
+        <li><strong>Ctrl + N</strong> : New Document</li>
+        <li><strong>Ctrl + O</strong> : Open Document</li>
+        <li><strong>Ctrl + S</strong> : Save</li>
+        <li><strong>Ctrl + Z</strong> : Undo/Redo (toggle last action)</li>
+        <li><strong>Ctrl + Alt + Z</strong> : Step backward (multiple undos)</li>
+        <li><strong>B</strong> : Brush Tool</li>
+        <li><strong>V</strong> : Move Tool</li>
+        <li><strong>M</strong> : Marquee Selection Tool</li>
+        <li><strong>Ctrl + T</strong> : Free Transform</li>
+        <li><strong>Ctrl + D</strong> : Deselect</li>
+        <li><strong>Ctrl + J</strong> : Duplicate layer</li>
+        <li><strong>Ctrl + Shift + N</strong> : New layer</li>
+        </ul>
+    </section>
+    </details>
+
+    <details>
+    <summary>📹 Zoom Meeting Shortcuts</summary>
+    <section>
+        <h3>🔤 General</h3>
+        <ul>
+        <li><strong>Alt + A</strong> : Mute/unmute audio</li>
+        <li><strong>Alt + V</strong> : Start/stop video</li>
+        <li><strong>Alt + S</strong> : Start/stop screen sharing</li>
+        <li><strong>Alt + R</strong> : Start/stop local recording</li>
+        <li><strong>Alt + P</strong> : Pause/resume recording</li>
+        <li><strong>Alt + Q</strong> : Leave meeting</li>
+        <li><strong>Alt + H</strong> : Show/hide chat panel</li>
+        <li><strong>Alt + Y</strong> : Raise/lower hand</li>
+        <li><strong>Ctrl + Alt + Shift + H</strong> : Show/hide participant list</li>
+        </ul>
+    </section>
+    </details>
+
+    <details>
+    <summary>🎵 Spotify Keyboard Shortcuts</summary>
+    <section>
+        <h3>🔤 Playback Controls</h3>
+        <ul>
+        <li><strong>Space</strong> : Play/Pause</li>
+        <li><strong>Ctrl + Right Arrow</strong> : Next track</li>
+        <li><strong>Ctrl + Left Arrow</strong> : Previous track</li>
+        <li><strong>Ctrl + Up Arrow</strong> : Volume up</li>
+        <li><strong>Ctrl + Down Arrow</strong> : Volume down</li>
+        <li><strong>Ctrl + Shift + Right Arrow</strong> : Fast forward</li>
+        <li><strong>Ctrl + Shift + Left Arrow</strong> : Rewind</li>
+        <li><strong>Ctrl + L</strong> : Search</li>
+        <li><strong>Ctrl + S</strong> : Toggle shuffle</li>
+        <li><strong>Ctrl + R</strong> : Toggle repeat</li>
+        </ul>
+    </section>
+    </details>
+
+
+      <!-- Made with  ------------------------------------------------------------------------------------------------>
+    <div class="made-by-inline">
+    Made with ❤️ by <a href="https://abdelrahmanz.netlify.app/" target="_blank" rel="noopener noreferrer">AbdElRahman</a>
+    </div>
+  <script>
+    const themes = [
+    ['#4facfe', '#00f2fe'],
+    ['#ff9966', '#ff5e62'],
+    ['#4a00e0', '#8e2de2'],
+    ['#7F00FF', '#E100FF'],
+    ['#56CCF2', '#2F80ED'],
+    ['#43e97b', '#38f9d7'],
+    ['#f953c6', '#b91d73'],
+    ['#30cfd0', '#330867'],
+    ['#f7797d', '#FBD786'],
+    ['#00c3ff', '#ffff1c'],
+    ['#3a7bd5', '#3a6073'],
+    ['#FF512F', '#DD2476'],
+    ['#1D976C', '#93F9B9'],
+    ['#ff6a00', '#ee0979'],
+    ['#2193b0', '#6dd5ed'],
+    ['#cc2b5e', '#753a88'],
+
+    // 7 Dark color themes added:
+    ['#232526', '#1c1c1c'],
+    ['#0f2027', '#203a43'],
+    ['#1c1c1c', '#282828'],
+    ['#232526', '#414345'],
+    ['#000000', '#434343'],
+    ['#141e30', '#243b55'],
+    ['#000428', '#004e92']
+    ];
+
+    const themeList = document.getElementById('themeList');
+
+    themes.forEach(([c1, c2]) => {
+      const colorDiv = document.createElement('div');
+      colorDiv.className = 'theme-color';
+      colorDiv.style.background = `linear-gradient(to right, ${c1}, ${c2})`;
+      colorDiv.onclick = () => applyTheme(c1, c2);
+      themeList.appendChild(colorDiv);
+    });
+
+    function toggleThemeMenu() {
+      themeList.classList.toggle('show');
+    }
+
+    function applyTheme(color1, color2) {
+    document.documentElement.style.setProperty('--main-color', color1);
+    document.documentElement.style.setProperty('--main-color2', color2);
+    themeList.classList.remove('show');
+
+    const card = document.querySelector('.card');
+
+    // Darken the colors by 50% (adjust amount as you like)
+    const darkColor1 = darkenHexColor(color1, 0.5);
+    const darkColor2 = darkenHexColor(color2, 0.5);
+
+    card.style.background = `linear-gradient(135deg, ${darkColor1}, ${darkColor2})`;
+
+    // Also style the input background:
+    const input = card.querySelector('input[type="date"]');
+    input.style.background = `linear-gradient(135deg, ${darkColor1}, ${darkColor2})`;
+    input.style.color = 'white'; // For text visibility
+    input.style.border = '1px solid rgba(255,255,255,0.3)';
+
+    // Update the theme-color meta tag to match the main theme color (first gradient color)
+    updateThemeColorMeta(color1);
+    }
+
+    updateThemeColorMeta(getComputedStyle(document.documentElement).getPropertyValue('--main-color').trim());
+
+
+
+
+    function updateThemeColorMeta(color) {
+        let metaThemeColor = document.querySelector('meta[name="theme-color"]');
+        if (!metaThemeColor) {
+            metaThemeColor = document.createElement('meta');
+            metaThemeColor.setAttribute('name', 'theme-color');
+            document.head.appendChild(metaThemeColor);
+        }
+        metaThemeColor.setAttribute('content', color);
+        }
+
+
+
+
+    function hexToRgba(hex, alpha) {
+    let c;
+    if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+        c = hex.substring(1).split('');
+        if(c.length === 3){
+        c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+        }
+        c = '0x' + c.join('');
+        return 'rgba(' + [(c>>16) & 255, (c>>8) & 255, c & 255].join(',') + `,${alpha})`;
+    }
+    throw new Error('Bad Hex');
+    }
+
+
+    function darkenHexColor(hex, amount = 0.2) {
+    let c;
+    if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+        c = hex.substring(1).split('');
+        if(c.length === 3){
+        c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+        }
+        c = '0x' + c.join('');
+        let r = Math.floor(((c >> 16) & 255) * (1 - amount));
+        let g = Math.floor(((c >> 8) & 255) * (1 - amount));
+        let b = Math.floor((c & 255) * (1 - amount));
+        return `rgb(${r},${g},${b})`;
+    }
+    throw new Error('Bad Hex');
+    }
+
+
+
+
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(reg => {
+            console.log('SW registered:', reg.scope);
+            })
+            .catch(err => {
+            console.log('SW registration failed:', err);
+            });
+        });
+    }
+
+
+    const rootStyles = getComputedStyle(document.documentElement);
+    const mainColor2 = rootStyles.getPropertyValue('--main-color2').trim();
+
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) themeMeta.setAttribute('content', mainColor2);
+
+
+
+    </script>
+</body>
+</html>

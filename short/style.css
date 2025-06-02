@@ -1,0 +1,204 @@
+:root {
+  --main-color:  #30cfd0;
+  --main-color2: #330867;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, var(--main-color), var(--main-color2));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  transition: background 0.5s ease;
+  color: white;
+  padding: 1rem;
+}
+
+.icon {
+    color: var(--main-color2);
+}
+
+header {
+  margin-top: 0.4rem;
+  text-align: center;
+}
+
+.theme-switcher {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  z-index: 110;
+}
+
+.theme-button {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  transition: transform 0.2s ease;
+}
+
+.theme-button:hover,
+.theme-button:focus {
+  transform: scale(1.2);
+  outline: none;
+}
+
+.theme-list {
+  display: none;
+  position: absolute;
+  right: 0;
+  margin-top: 10px;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  flex-wrap: wrap;
+  max-width: 200px;
+  gap: 6px;
+  z-index: 100;
+}
+
+.theme-list.show {
+  display: flex;
+}
+
+.theme-color {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease;
+}
+
+.theme-color:hover {
+  transform: scale(1.3);
+  border-color: #000;
+}
+
+main {
+  max-width: 600px;
+  width: 100%;
+  padding-bottom: 80px; /* for footer spacing */
+}
+
+details {
+  background: rgba(255 255 255 / 0.1);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  color: white;
+}
+
+summary {
+  font-weight: 600;
+  font-size: 1.3rem;
+  cursor: pointer;
+  outline: none;
+}
+
+section h3 {
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.5rem 0 1.5rem;
+}
+
+li {
+  padding: 4px 0;
+  line-height: 1.4;
+}
+
+li strong {
+  color: var(--main-color2);
+}
+
+.card {
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 90%;
+  margin: 2rem auto;
+  text-align: center;
+  color: white;
+  background: linear-gradient(135deg, 
+    /* default darkened colors from root */
+    rgb(97, 0, 254),
+    rgb(0, 242, 254)
+  );
+  transition: background 0.5s ease;
+}
+
+
+.made-by-inline {
+  margin-top: -5px;
+  margin-bottom: 10px;
+  font-size: 23px;
+  color: var(--main-color, #555);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  user-select: none;
+}
+
+.made-by-inline a {
+  color: var(--main-color2, #888);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.made-by-inline a:hover {
+  text-decoration: underline;
+}
+
+#shortcutSearch {
+  width: 100%;
+  max-width: 500px;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(to right, var(--main-color), var(--main-color2));
+  color: white;
+  box-shadow: 0 0 8px rgba(255 255 255 / 0.2);
+  outline: none;
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+#shortcutSearch::placeholder {
+  color: rgba(255 255 255 / 0.7);
+}
+
+#shortcutSearch:focus {
+  box-shadow: 0 0 12px rgba(255 255 255 / 0.8);
+  background: linear-gradient(to right, var(--main-color2), var(--main-color));
+}
+
+
+@media (max-width: 400x) {
+  summary {
+    font-size: 1.2rem;   /* slightly smaller font on small screens */
+    cursor: pointer;     /* keep pointer if still clickable */
+    padding: 8px 12px;   /* optional: add padding for easier touch */
+  }
+}
